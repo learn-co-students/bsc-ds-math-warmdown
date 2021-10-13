@@ -44,17 +44,95 @@ df['target'] = data['target']
 df.head(3)
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>sex</th>
+      <th>bmi</th>
+      <th>bp</th>
+      <th>s1</th>
+      <th>s2</th>
+      <th>s3</th>
+      <th>s4</th>
+      <th>s5</th>
+      <th>s6</th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.038076</td>
+      <td>0.050680</td>
+      <td>0.061696</td>
+      <td>0.021872</td>
+      <td>-0.044223</td>
+      <td>-0.034821</td>
+      <td>-0.043401</td>
+      <td>-0.002592</td>
+      <td>0.019908</td>
+      <td>-0.017646</td>
+      <td>151.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.001882</td>
+      <td>-0.044642</td>
+      <td>-0.051474</td>
+      <td>-0.026328</td>
+      <td>-0.008449</td>
+      <td>-0.019163</td>
+      <td>0.074412</td>
+      <td>-0.039493</td>
+      <td>-0.068330</td>
+      <td>-0.092204</td>
+      <td>75.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.085299</td>
+      <td>0.050680</td>
+      <td>0.044451</td>
+      <td>-0.005671</td>
+      <td>-0.045599</td>
+      <td>-0.034194</td>
+      <td>-0.032356</td>
+      <td>-0.002592</td>
+      <td>0.002864</td>
+      <td>-0.025930</td>
+      <td>141.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 # Gradient Descent 
 
 ## 1. Set up a train test split
 
 In the cell below, please create a train test split for this dataset, setting `target` as the response variable and all other columns as independent variables.
 * Set the random state to 2021
-
-
-```python
-# Your code here
-```
 
 
 ```python
@@ -70,11 +148,6 @@ Now, initialize an `SGDRegressor` model.
 
 
 ```python
-# Your code here
-```
-
-
-```python
 model = SGDRegressor(random_state=2021)
 ```
 
@@ -84,13 +157,19 @@ In the cell below, fit the model to the training data.
 
 
 ```python
-# Your code here
-```
-
-
-```python
 model.fit(X_train, y_train)
 ```
+
+    /Users/joel/opt/anaconda3/envs/python3/lib/python3.9/site-packages/sklearn/linear_model/_stochastic_gradient.py:1225: ConvergenceWarning: Maximum number of iteration reached before convergence. Consider increasing max_iter to improve the fit.
+      warnings.warn("Maximum number of iteration reached before "
+
+
+
+
+
+    SGDRegressor(random_state=2021)
+
+
 
 At this point in the program, you may have become accustomed to ignoring pink warning messages –– mostly because `pandas` returns many unhelpful warning messages. 
 
@@ -106,10 +185,13 @@ Let's zoom in on this parameter for a second.
 
 
 ```python
-# Run this cell unchanged
 from src.questions import *
 question_4.display()
 ```
+
+
+    VBox(children=(Output(layout=Layout(bottom='5px', width='auto')), RadioButtons(layout=Layout(flex_flow='column…
+
 
 ## 5. Update the max_iter
 
@@ -118,14 +200,16 @@ In the cell below, initialize a new `SGDRegessor` model with `max_iter` set to 1
 
 
 ```python
-# Your code here
-```
-
-
-```python
 model = SGDRegressor(max_iter=10000, random_state=2021)
 model.fit(X_train, y_train)
 ```
+
+
+
+
+    SGDRegressor(max_iter=10000, random_state=2021)
+
+
 
 The model converged! This tells us that the model just needed to run for longer to reach the minima of the cost curve. 
 
@@ -135,56 +219,6 @@ But how do you find the necessary number of iterations?
 In the cell below, we have written some code that shows you how to find the required number of iterations programmatically. This code is mostly being provided in case you ever need it, so don't stress if it feels intimidating!
 
 In truth, there is a different hyperparameter we tend to use to help our models converges. 
-
-
-```python
-# Run this cell unchanged
-import warnings
-
-# Loop over a range of numbers between 1000 10,000
-for i in range(1000, 10000, 500):
-    # Catch the ConvergenceWarning
-    with warnings.catch_warnings():
-        # If a warning is produced, throw an error instead
-        warnings.filterwarnings('error')
-        # Place the model fit inside a try except block to catch the error
-        try:
-            model = SGDRegressor(max_iter=i, random_state=2021)
-            model.fit(X_train, y_train)
-            # If the model fits without a ConvergenceWarning stop the for loop
-            break
-        except Warning:
-            # If the model returns a ConvergenceWarning, move to the next iteration.
-            continue
-            
-# Print the number of iterations that allowed the model to converge
-print('Max iterations needed for convergence:', i)
-```
-
-
-```python
-# Run this cell unchanged
-import warnings
-
-# Loop over a range of numbers between 1000 10,000
-for i in range(1000, 10000, 500):
-    # Catch the ConvergenceWarning
-    with warnings.catch_warnings():
-        # If a warning is produced, throw an error instead
-        warnings.filterwarnings('error')
-        # Place the model fit inside a try except block to catch the error
-        try:
-            model = SGDRegressor(max_iter=i, random_state=2021)
-            model.fit(X_train, y_train)
-            # If the model fits without a ConvergenceWarning stop the for loop
-            break
-        except Warning:
-            # If the model returns a ConvergenceWarning, move to the next iteration.
-            continue
-            
-# Print the number of iterations that allowed the model to converge
-print('Max iterations needed for convergence:', i)
-```
 
 ### Let's zoom in on the *learning rate*!
 
@@ -197,23 +231,23 @@ question_6.display()
 ```
 
 
-```python
-# Run this cell unchanged
-question_6.display()
-```
+    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
 
-## 7. Update the alpha to .01 and set the max_iter to 1500
+
+## 7. Update the alpha to .01 and set the max_iter to 2000
 
 
 ```python
-# Your code here
+model = SGDRegressor(max_iter=2000, alpha=0.01, random_state=2021)
+model.fit(X_train, y_train)
 ```
 
 
-```python
-model = SGDRegressor(max_iter=1500, alpha=0.01, random_state=2021)
-model.fit(X, y)
-```
+
+
+    SGDRegressor(alpha=0.01, max_iter=2000, random_state=2021)
+
+
 
 ## 8. The model converged - True or False
 
@@ -224,10 +258,8 @@ question_8.display()
 ```
 
 
-```python
-# Run this cell unchanged
-question_8.display()
-```
+    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
+
 
 ## 9. Select the answer that best describes how alpha impacts a model's fit
 
@@ -238,10 +270,8 @@ question_9.display()
 ```
 
 
-```python
-# Run this cell unchanged
-question_9.display()
-```
+    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
+
 
 # Linear Algebra 
 
@@ -254,10 +284,8 @@ question_10.display()
 ```
 
 
-```python
-# Run this cell unchanged
-question_10.display()
-```
+    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
+
 
 ## 11. Please select the solution for the dot product of the following vectors.
 
@@ -273,10 +301,8 @@ question_11.display()
 ```
 
 
-```python
-# Run this cell unchanged
-question_11.display()
-```
+    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
+
 
 ## 12. How do you turn a list into a numpy array?
 
@@ -286,6 +312,10 @@ question_11.display()
 
 question_12.display()
 ```
+
+
+    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
+
 
 ## 13. Please find the dot product of the following vectors
 
@@ -313,13 +343,19 @@ vector_2 = [
 
 
 ```python
-# Your code here
-```
-
-
-```python
 vector_1 = np.array(vector_1)
 vector_2 = np.array(vector_2)
 
 np.dot(vector_1.T, vector_2)
 ```
+
+
+
+
+    array([[-3.31869275],
+           [-7.80043543],
+           [-9.35675419],
+           [-0.13185929],
+           [ 1.207176  ]])
+
+

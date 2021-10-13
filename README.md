@@ -148,7 +148,7 @@ print('Max iterations needed for convergence:', i)
 question_6.display()
 ```
 
-## 7. Update the alpha to .01 and set the max_iter to 1500
+## 7. Update the alpha to .01 and set the max_iter to 2000
 
 
 ```python
