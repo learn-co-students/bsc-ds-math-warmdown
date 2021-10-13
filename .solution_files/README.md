@@ -44,89 +44,6 @@ df['target'] = data['target']
 df.head(3)
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>bmi</th>
-      <th>bp</th>
-      <th>s1</th>
-      <th>s2</th>
-      <th>s3</th>
-      <th>s4</th>
-      <th>s5</th>
-      <th>s6</th>
-      <th>target</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.038076</td>
-      <td>0.050680</td>
-      <td>0.061696</td>
-      <td>0.021872</td>
-      <td>-0.044223</td>
-      <td>-0.034821</td>
-      <td>-0.043401</td>
-      <td>-0.002592</td>
-      <td>0.019908</td>
-      <td>-0.017646</td>
-      <td>151.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.001882</td>
-      <td>-0.044642</td>
-      <td>-0.051474</td>
-      <td>-0.026328</td>
-      <td>-0.008449</td>
-      <td>-0.019163</td>
-      <td>0.074412</td>
-      <td>-0.039493</td>
-      <td>-0.068330</td>
-      <td>-0.092204</td>
-      <td>75.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.085299</td>
-      <td>0.050680</td>
-      <td>0.044451</td>
-      <td>-0.005671</td>
-      <td>-0.045599</td>
-      <td>-0.034194</td>
-      <td>-0.032356</td>
-      <td>-0.002592</td>
-      <td>0.002864</td>
-      <td>-0.025930</td>
-      <td>141.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 # Gradient Descent 
 
 ## 1. Set up a train test split
@@ -160,17 +77,6 @@ In the cell below, fit the model to the training data.
 model.fit(X_train, y_train)
 ```
 
-    /Users/joel/opt/anaconda3/envs/python3/lib/python3.9/site-packages/sklearn/linear_model/_stochastic_gradient.py:1225: ConvergenceWarning: Maximum number of iteration reached before convergence. Consider increasing max_iter to improve the fit.
-      warnings.warn("Maximum number of iteration reached before "
-
-
-
-
-
-    SGDRegressor(random_state=2021)
-
-
-
 At this point in the program, you may have become accustomed to ignoring pink warning messages –– mostly because `pandas` returns many unhelpful warning messages. 
 
 It is important to state that, generally, you should not default to ignoring warning messages. In this case the above pink warning message is quite informative!
@@ -189,10 +95,6 @@ from src.questions import *
 question_4.display()
 ```
 
-
-    VBox(children=(Output(layout=Layout(bottom='5px', width='auto')), RadioButtons(layout=Layout(flex_flow='column…
-
-
 ## 5. Update the max_iter
 
 In the cell below, initialize a new `SGDRegessor` model with `max_iter` set to 10,000. 
@@ -203,13 +105,6 @@ In the cell below, initialize a new `SGDRegessor` model with `max_iter` set to 1
 model = SGDRegressor(max_iter=10000, random_state=2021)
 model.fit(X_train, y_train)
 ```
-
-
-
-
-    SGDRegressor(max_iter=10000, random_state=2021)
-
-
 
 The model converged! This tells us that the model just needed to run for longer to reach the minima of the cost curve. 
 
@@ -230,10 +125,6 @@ In truth, there is a different hyperparameter we tend to use to help our models 
 question_6.display()
 ```
 
-
-    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
-
-
 ## 7. Update the alpha to .01 and set the max_iter to 2000
 
 
@@ -241,13 +132,6 @@ question_6.display()
 model = SGDRegressor(max_iter=2000, alpha=0.01, random_state=2021)
 model.fit(X_train, y_train)
 ```
-
-
-
-
-    SGDRegressor(alpha=0.01, max_iter=2000, random_state=2021)
-
-
 
 ## 8. The model converged - True or False
 
@@ -257,10 +141,6 @@ model.fit(X_train, y_train)
 question_8.display()
 ```
 
-
-    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
-
-
 ## 9. Select the answer that best describes how alpha impacts a model's fit
 
 
@@ -268,10 +148,6 @@ question_8.display()
 # Run this cell unchanged
 question_9.display()
 ```
-
-
-    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
-
 
 # Linear Algebra 
 
@@ -282,10 +158,6 @@ question_9.display()
 # Run this cell unchanged
 question_10.display()
 ```
-
-
-    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
-
 
 ## 11. Please select the solution for the dot product of the following vectors.
 
@@ -300,10 +172,6 @@ $vector_2= \begin{bmatrix} -4&82\\ \end{bmatrix}$
 question_11.display()
 ```
 
-
-    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
-
-
 ## 12. How do you turn a list into a numpy array?
 
 
@@ -312,10 +180,6 @@ question_11.display()
 
 question_12.display()
 ```
-
-
-    VBox(children=(Output(layout=Layout(bottom='5px', width='auto'), outputs=({'output_type': 'display_data', 'met…
-
 
 ## 13. Please find the dot product of the following vectors
 
@@ -348,14 +212,3 @@ vector_2 = np.array(vector_2)
 
 np.dot(vector_1.T, vector_2)
 ```
-
-
-
-
-    array([[-3.31869275],
-           [-7.80043543],
-           [-9.35675419],
-           [-0.13185929],
-           [ 1.207176  ]])
-
-
